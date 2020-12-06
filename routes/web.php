@@ -1,12 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
 
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/test', [App\Http\Controllers\TestController::class, 'index'])->name('test');
-Route::post('/delete', [App\Http\Controllers\TestController::class, 'delete'])->name('delete');
+
+Route::get('/posts', [PostController::class, 'index'])
+    ->name('posts');
+Route::delete('posts/{post}/delete', [PostController::class, 'destroy'])
+    ->name('delete');
 
 Auth::routes();
 

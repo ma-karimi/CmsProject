@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
-class TestController extends Controller
+class PostController extends Controller
 {
-
     public function __construct()
     {
         //$this->middleware('auth');
@@ -17,10 +15,11 @@ class TestController extends Controller
 
     public function index()
     {
-        $posts=Post::all();
-        return view('test')->withPosts($posts);
+        $posts=Post::with(['tags','categories','image','author'])->get();
+        return view('posts.index')->withPosts($posts);
     }
-    public function delete(Post $post)
+
+    public function destroy(Post $post)
     {
         $post->delete();
         return redirect()->back();

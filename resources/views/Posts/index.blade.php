@@ -22,6 +22,8 @@
                             </tr>
                             </thead>
                             <tbody>
+
+
                             @foreach($posts as $post)
                                 <tr>
                                     <td>{{$post->id}}</td>
@@ -35,7 +37,8 @@
                                     </td>
                                     <td>
                                         @foreach($post->tags as $tags)
-                                            <div>{{ucfirst($tags->title)."\n"}}</div>
+                                            <div class="badge badge-dark border-info border">{{ucfirst($tags->title)}}</div>
+                                            <br>
                                         @endforeach</td>
                                     <td>
                                         <form action="{{route('delete',['post'=>$post->id])}}" method="post">
