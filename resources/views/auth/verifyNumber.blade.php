@@ -8,7 +8,7 @@
                     <div class="card-header">{{ __('تاییدیه شماره تلفن') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('login') }}">
+                        <form method="get" action="{{ route('register') }}">
                             @csrf
 
                             @if(session('error'))

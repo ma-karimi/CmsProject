@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Authenticate\RegisterController;
 use App\Http\Controllers\Authenticate\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
@@ -19,7 +20,10 @@ Route::group(['prefix' => 'auth'],function(){
     Route::get('logout', [LoginController::class, 'logout'])
         ->name('logout');
 
-
+    Route::get('register', [RegisterController::class, 'showRegister'])
+        ->name('register');
+    Route::post('register', [RegisterController::class, 'register'])
+        ->name('register');
 });
 
 Route::group(['prefix' => 'panel'],function(){

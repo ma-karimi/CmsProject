@@ -41,9 +41,9 @@ class LoginController extends Controller
 
     public function logout()
     {
+        session()->forget('number');
 
-        if (\auth()->check())
-            \auth()->logout();
+        Auth::logout();
         return redirect()->route('/');
     }
 }
