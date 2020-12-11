@@ -16,7 +16,7 @@ class ImageFactory extends Factory
         return [
             'title' => $this->faker->word,
             'alt' => $this->faker->word,
-            'path'=> $this->faker->image(storage_path().'/app/public/images'),
+            'path'=> $this->faker->imageUrl(),
 
         ];
     }
