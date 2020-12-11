@@ -7,8 +7,9 @@
                 <div class="card">
                     <div class="card-header">{{ __('ورود') }}</div>
 
+
                     <div class="card-body">
-                        <form method="POST" action="{{ route('authNum') }}">
+                        <form method="POST" action="{{ route('login') }}">
                             @csrf
 
                             @if(session('error'))
@@ -16,9 +17,9 @@
                             @endif
 
                             <div class="form-group row">
-                                <label for="number" class="col-md-4 col-form-label text-md-right">{{ __('شماره موبایل:') }}</label>
+                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('رمز عبور:') }}</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="number">
+                                    <input type="password" class="form-control" name="password">
                                 </div>
                             </div>
 
