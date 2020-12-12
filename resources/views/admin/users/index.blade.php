@@ -38,7 +38,9 @@
                             @endforeach
                             </tbody>
                         </table>
-
+                        <div class="my-4 row justify-content-center">
+                            {!! $users->links() !!}
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\PanelController;
+use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\PostStatusController;
 use App\Http\Controllers\Admin\UserController;
 
 use App\Http\Controllers\Admin\UserStatusController;
@@ -35,8 +37,9 @@ Route::group(['middleware' => ['web', 'role:admin'], 'prefix' => 'admin'], funct
     Route::get('dashboard', [PanelController::class,'__invoke'])
         ->name('admin.dashboard');
 
-
     Route::post('users/{user}/status', UserStatusController::class)->name('users.status');
-
     Route::resource('users', UserController::class)->only('index','show','destroy');
+
+    Route::resource('posts', PostController::class)->only('index','show','destroy');
+    Route::post('posts/{post}/status', PostStatusController::class)->name('posts.status');
 });

@@ -86,7 +86,7 @@
                         <img src="https://uupload.ir/files/h23g_richscorer_small.png" alt="">
                         <a class="m-3" href="{{route('admin.dashboard')}}">پـنل مـدیریـت</a>
                         <a class="m-3" href="{{route('users.index')}}">کـاربران</a>
-                        <a class="m-3" href="#">پـســت ها</a>
+                        <a class="m-3" href="{{route('posts.index')}}">پـســت ها</a>
 
                     </div>
 
