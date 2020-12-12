@@ -1,11 +1,10 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\PanelController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Authenticate\RegisterController;
 use App\Http\Controllers\Authenticate\LoginController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -31,6 +30,8 @@ Route::group(['prefix' => 'auth'],function(){
 
 Route::group(['middleware' => ['role:admin'], 'prefix' => 'admin'], function () {
 
-    Route::get('dashboard', [PanelController::class, '__invoke'])
-        ->name('panel.dashboard');
+    Route::get('dashboard', [PanelController::class])
+        ->name('admin.dashboard');
+
+    Route::get('users', [UserController::class,'index'])->name('admin.users');
 });

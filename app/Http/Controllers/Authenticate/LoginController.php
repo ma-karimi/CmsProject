@@ -19,12 +19,12 @@ class LoginController extends Controller
     public function authNum(AuthNumberRequest $request)
     {
         $number = $request->get('number');
-        session()->put('number',$number);
-        if(User::where('number',$number)->exists()){
+        session()->put('number', $number);
+        if (User::where('number', $number)->exists()) {
             return view('auth.getPass');
-        }else{
-            $verify_code = rand(10000,99999);
-            return view('auth.verifyNumber',compact('verify_code', $verify_code));
+        } else {
+            $verify_code = rand(10000, 99999);
+            return view('auth.verifyNumber', compact('verify_code', $verify_code));
         }
     }
 
@@ -34,7 +34,8 @@ class LoginController extends Controller
         $number = session('number');
 
         if (Auth::attempt(['number' => $number , 'password' => $pass]))
-            return redirect()->route('panel.dashboard'); //todo:redirect to dashboard
+            dd('asd');
+            return redirect()->route('admin.dashboard'); //todo:redirect to dashboard
         else
             return redirect()->back()->with('error', 'مشـخصــات وارد شـده صـحیح نـیــست.');
     }
