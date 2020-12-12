@@ -9,6 +9,11 @@
 
                     <div class="card-body">
 
+                        @if(session('status'))
+                            <div class="alert alert-success">{{session('status')}}</div>
+                        @endif
+
+
                         <table class="table">
                             <thead>
                             <tr>
@@ -38,16 +43,17 @@
                             <tr>
                                 <td>عمـلیات:</td>
                                 <td class="d-flex flex-row">
-                                    <form action="" method="post">
+                                    <form action="{{route('users.destroy',$user)}}" method="post">
                                         @csrf @method('delete')
                                         <button type="submit" class="btn btn-danger m-1">{{ __('حــذف') }}</button>
                                     </form>
 
-                                    <div>
-                                        <bottun class="btn btn-info m-1" onclick="status()">
-                                            {{$user->status ? 'غیرفعال' : 'فعال'}}
-                                        </bottun>
-                                    </div>
+                                    <form action="{{route('users.status',$user)}}" method="post">
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger m-1">
+                                            {{$user->status ? 'فـعال سـازی' : 'غـیر فـعال سـازی '}}
+                                        </button>
+                                    </form>
 
                                 </td>
                             </tr>
@@ -63,22 +69,3 @@
     </div>
 @endsection
 
-@section('script')
-    <script>
-        $.ajaxSetup({
-            headers : {
-                'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        function status() {
-            $.ajax({
-                'method' : 'post',
-                'url' : '{{ route('users.status', $user)}}',
-                success : function (response){
-                    console.log(response)
-                    if(response.success)
-                        $('#status').html(response.data.title + "(" + (response.data.status ? 'غیرفعال' : 'فعال' ) + ")")
-                }
-            })
-        }
-@endsection

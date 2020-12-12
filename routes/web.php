@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\PanelController;
 use App\Http\Controllers\Admin\UserController;
+
 use App\Http\Controllers\Admin\UserStatusController;
 use App\Http\Controllers\Authenticate\RegisterController;
 use App\Http\Controllers\Authenticate\LoginController;
@@ -33,6 +34,7 @@ Route::group(['middleware' => ['web', 'role:admin'], 'prefix' => 'admin'], funct
 
     Route::get('dashboard', [PanelController::class,'__invoke'])
         ->name('admin.dashboard');
+
 
     Route::post('users/{user}/status', UserStatusController::class)->name('users.status');
 

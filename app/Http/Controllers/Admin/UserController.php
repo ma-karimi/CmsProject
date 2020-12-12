@@ -5,13 +5,15 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\DocBlock\Description;
 
 class UserController extends Controller
 {
 
     public function index()
     {
-        $users = User::all();
+//        $users = User::all();
+        $users = User::simplePaginate(5);
         return view('admin.users.index')->withUsers($users);
     }
 
@@ -48,6 +50,7 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect()->route('users.index');
     }
 }
