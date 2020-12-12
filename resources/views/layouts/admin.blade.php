@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Cms Project</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -85,7 +85,7 @@
                         <h3>پـنل مـدیریـت</h3>
                         <img src="https://uupload.ir/files/h23g_richscorer_small.png" alt="">
                         <a class="m-3" href="{{route('admin.dashboard')}}">پـنل مـدیریـت</a>
-                        <a class="m-3" href="{{route('admin.users.index')}}">کـاربران</a>
+                        <a class="m-3" href="{{route('users.index')}}">کـاربران</a>
                         <a class="m-3" href="#">پـســت ها</a>
 
                     </div>
@@ -99,5 +99,11 @@
 
 </div>
 
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
+@yield('script')
 </body>
 </html>

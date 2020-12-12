@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\PanelController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\UserStatusController;
 use App\Http\Controllers\Authenticate\RegisterController;
 use App\Http\Controllers\Authenticate\LoginController;
 use Illuminate\Support\Facades\Route;
@@ -28,10 +29,12 @@ Route::group(['prefix' => 'auth'],function(){
         ->name('register');
 });
 
-Route::group(['middleware' => ['role:admin'], 'prefix' => 'admin'], function () {
+Route::group(['middleware' => ['web', 'role:admin'], 'prefix' => 'admin'], function () {
 
-    Route::get('dashboard', [PanelController::class])
+    Route::get('dashboard', [PanelController::class,'__invoke'])
         ->name('admin.dashboard');
 
-    Route::get('users', [UserController::class,'index'])->name('admin.users');
+    Route::post('users/{user}/status', UserStatusController::class)->name('users.status');
+
+    Route::resource('users', UserController::class)->only('index','show','destroy');
 });

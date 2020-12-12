@@ -31,6 +31,11 @@ class User extends Authenticatable
         $this->attributes['password'] = Hash::needsRehash($value) ? Hash::make($value) : $value;
     }
 
+    public function getRoleNamesAttribute()
+    {
+        return $this->getRoleNames()->implode(',');
+    }
+
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];

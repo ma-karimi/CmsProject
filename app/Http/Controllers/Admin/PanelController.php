@@ -17,8 +17,7 @@ class PanelController extends Controller
      */
     public function __invoke(Request $request)
     {
-        dd(Auth::user());
-        $admin = User::role('admin')->first();
+        $admin = Auth::user();
         return view('admin.dashboard')->withAdmin($admin);
     }
 }

@@ -32,10 +32,15 @@ class LoginController extends Controller
     {
         $pass = $request->get('password');
         $number = session('number');
-
-        if (Auth::attempt(['number' => $number , 'password' => $pass]))
-            dd('asd');
-            return redirect()->route('admin.dashboard'); //todo:redirect to dashboard
+        $user = User::where('number', $number)->first();
+        if (Hash::check($pass, $user->getAuthPassword())){
+            Auth::login($user);
+            if ($user->hasRole('admin')){
+                return redirect()->route('admin.dashboard');
+            }
+            else
+                return redirect()->route('/'); #todo redirect to user dashboard panel
+        }
         else
             return redirect()->back()->with('error', 'مشـخصــات وارد شـده صـحیح نـیــست.');
     }

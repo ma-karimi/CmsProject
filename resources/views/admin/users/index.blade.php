@@ -25,19 +25,14 @@
 
                             @foreach($users as $user)
                                 <tr>
-                                    <td>
-                                        <a href="{{route('admin.users.show')}}">{{$user->id}}</a>
-                                    </td>
+                                    <td>{{$user->id}}</td>
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->email}}</td>
                                     <td>{{$user->number}}</td>
-                                    <td>{{$user->getRoleNames()}}</td>
-                                    <td>{{$user->status}}</td>
+                                    <td>{{$user->RoleNames}}</td>
+                                    <td>{{$user->status ? 'غیرفعال' : 'فعال'}}</td>
                                     <td>
-                                        <form action="" method="post">
-                                            @csrf @method('delete')
-                                            <button type="submit" class="btn btn-danger">{{ __('Delete') }}</button>
-                                        </form>
+                                        <a class="btn btn-outline-dark" href="{{route('users.show', $user->id)}}">{{ __('نـمایــش') }}</a>
                                     </td>
                                 </tr>
                             @endforeach
