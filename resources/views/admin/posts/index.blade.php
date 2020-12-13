@@ -5,7 +5,10 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">{{ __('Dashboard') }}</div>
+                    <div class="card-header d-flex flex-row align-items-center justify-content-between">
+                        {{ __('مـدیریــت پسـت ها') }}
+                        <a class="btn btn-outline-dark" href="{{ route('admin.dashboard') }}">{{ __('بازگشــت') }}</a>
+                    </div>
 
                     <div class="card-body">
 
