@@ -20,7 +20,7 @@ class RegisterController extends Controller
         $user = User::create($request->validated());
 
         if (Auth::attempt(['email' => $user->email, 'password' => $request->get('password')])){
-            return redirect()->route('panel.index'); //todo:redirect to dashboard
+            return redirect()->route('users.dashboard'); //todo:redirect to dashboard
         }
         else
             return redirect()->back()->with('error', 'مشـخصــات وارد شـده صـحیح نـیــست.');

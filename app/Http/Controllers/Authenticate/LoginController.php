@@ -21,7 +21,7 @@ class LoginController extends Controller
         $number = $request->get('number');
         session()->put('number', $number);
         if (User::where('number', $number)->exists()) {
-            return view('auth.getPass');
+            return view('auth.getPass');  #todo redirect a route not return a view
         } else {
             $verify_code = rand(10000, 99999);
             return view('auth.verifyNumber', compact('verify_code', $verify_code));
@@ -39,7 +39,7 @@ class LoginController extends Controller
                 return redirect()->route('admin.dashboard');
             }
             else
-                return redirect()->route('/'); #todo redirect to user dashboard panel
+                return redirect()->route('users.dashboard');
         }
         else
             return redirect()->back()->with('error', 'مشـخصــات وارد شـده صـحیح نـیــست.');
