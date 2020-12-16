@@ -17,9 +17,11 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'auth'],function(){
     Route::get('login', [LoginController::class, 'showLogin'])
-        ->name('login');
+        ->name('showLogin');
     Route::post('authNum', [LoginController::class, 'authNum'])
         ->name('authNum');
+    Route::get('setPass', [LoginController::class, 'setPass'])
+        ->name('setPass');
     Route::post('login', [LoginController::class, 'Login'])
         ->name('login');
 

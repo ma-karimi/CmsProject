@@ -21,11 +21,16 @@ class LoginController extends Controller
         $number = $request->get('number');
         session()->put('number', $number);
         if (User::where('number', $number)->exists()) {
-            return view('auth.getPass');  #todo redirect a route not return a view
+            return redirect()->route('setPass'); 
         } else {
             $verify_code = rand(10000, 99999);
             return view('auth.verifyNumber', compact('verify_code', $verify_code));
         }
+    }
+
+    public function setPass()
+    {
+        return view('auth.getPass');
     }
 
     public function Login(Request $request)
