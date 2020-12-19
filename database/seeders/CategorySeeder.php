@@ -10,7 +10,7 @@ class CategorySeeder extends Seeder
 {
     public function run()
     {
-        Category::factory()->count(10)->create()->each(function ($category){
+        Category::factory()->count(5)->create()->each(function ($category){
             Image::factory()->create(['imageable_type' => Category::class, 'imageable_id'=>$category->id]);
         });
     }

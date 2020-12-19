@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 class Category extends Model
 {
     use HasFactory;
-    protected $guarded = [];
+    protected $guarded = ['image'];
     public $timestamps = false;
 
     public function setTitleAttribute($value)
