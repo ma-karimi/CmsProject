@@ -16,70 +16,76 @@
                             <div class="alert alert-success">{{session('status')}}</div>
                         @endif
 
-
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <td>#</td>
-                                <td>{{$post->id}}</td>
-                            </tr>
-                            <tr>
-                                <td>عـنوان:</td>
-                                <td>{{$post->title}}</td>
-                            </tr>
-                            <tr>
-                                <td>مـحتـوی:</td>
-                                <td>{{$post->content}}</td>
-                            </tr>
-                            <tr>
-                                <td>پـیوند یـکتــا:</td>
-                                <td>{{$post->slug}}</td>
-                            </tr>
-                            <tr>
-                                <td>نـویسـنده:</td>
-                                <td>{{$post->author->name}}</td>
-                            </tr>
-                            <tr>
-                                <td>دسـته بـندی:</td>
-                                <td>
-                                    @foreach($post->categories as $category)
-                                        <div class="badge badge-light border-dark border">{{ucfirst($category->title)}}</div>
+                        <div class="d-flex flex-row ">
+                            <table class="table col-md-8">
+                                <thead>
+                                <tr>
+                                    <td>#</td>
+                                    <td>{{$post->id}}</td>
+                                </tr>
+                                <tr>
+                                    <td>عـنوان:</td>
+                                    <td>{{$post->title}}</td>
+                                </tr>
+                                <tr>
+                                    <td>مـحتـوی:</td>
+                                    <td>{{$post->content}}</td>
+                                </tr>
+                                <tr>
+                                    <td>پـیوند یـکتــا:</td>
+                                    <td>{{$post->slug}}</td>
+                                </tr>
+                                <tr>
+                                    <td>نـویسـنده:</td>
+                                    <td>{{$post->author->name}}</td>
+                                </tr>
+                                <tr>
+                                    <td>دسـته بـندی:</td>
+                                    <td>
+                                        @foreach($post->categories as $category)
+                                            <div class="badge badge-light border-dark border">{{ucfirst($category->title)}}</div>
                                     @endforeach
-                                <td>
-                            </tr>
-                            <tr>
-                                <td>تــگ:</td>
-                                <td>
-                                    @foreach($post->tags as $tags)
-                                        <div class="badge badge-info border-dark border">{{ucfirst($tags->title)}}</div>
-                                    @endforeach
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>وضـعیـت:</td>
-                                <td>{{$post->status ? 'انتـشــار' : 'بایـگانی'}}</td>
-                            </tr>
-                            <tr>
-                                <td>عمـلیات:</td>
-                                <td class="d-flex flex-row">
-                                    <form action="{{route('posts.destroy',$post)}}" method="post">
-                                        @csrf @method('delete')
-                                        <button type="submit" class="btn btn-danger m-1">{{ __('حــذف') }}</button>
-                                    </form>
+                                    <td>
+                                </tr>
+                                <tr>
+                                    <td>تــگ:</td>
+                                    <td>
+                                        @foreach($post->tags as $tags)
+                                            <div class="badge badge-info border-dark border">{{ucfirst($tags->title)}}</div>
+                                        @endforeach
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>وضـعیـت:</td>
+                                    <td>{{$post->status ? 'انتـشــار' : 'بایـگانی'}}</td>
+                                </tr>
+                                <tr>
+                                    <td>عمـلیات:</td>
+                                    <td class="d-flex flex-row">
+                                        <form action="{{route('posts.destroy',$post)}}" method="post">
+                                            @csrf @method('delete')
+                                            <button type="submit" class="btn btn-outline-danger m-1">{{ __('حــذف') }}</button>
+                                        </form>
 
-                                    <form action="{{route('posts.status',$post)}}" method="post">
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger m-1">
-                                            {{$post->status ? 'بایـگانی' : 'انتـشــار'}}
-                                        </button>
+                                        <form action="{{route('posts.status',$post)}}" method="post">
+                                            @csrf
+                                            <button type="submit"
+                                                    class="{{$post->status ? 'btn btn-outline-danger' : 'btn btn-outline-success'}} m-1">
+                                                {{$post->status ? 'بایـگانی' : 'انتـشــار'}}
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
 
-                                    </form>
-                                </td>
-                            </tr>
+                                </thead>
 
-                            </thead>
+                            </table>
+                            <div class="col-md-4">
+                                <img style="max-width: 100%;max-height: 100%" src="{{$path}}" alt="{{$post->image->alt}}">
+                                <p class="font-weight-bold text-capitalize text-center mt-3">{{$post->image->title}}</p>
+                            </div>
+                        </div>
 
-                        </table>
 
                     </div>
                 </div>

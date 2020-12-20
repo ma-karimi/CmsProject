@@ -13,12 +13,12 @@ class PostSeeder extends Seeder
 
     public function run()
     {
-        $categories=Category::all();
-        $tags=Tag::all();
-        Post::factory()->count(2000)->create()->each(function ($post) use ($categories, $tags){
+        $categories = Category::all();
+        $tags = Tag::all();
+        Post::factory()->count(10)->create()->each(function ($post) use ($categories, $tags) {
             $post->categories()->attach($categories->random(rand(1, 3)));
             $post->tags()->attach($tags->random(rand(1, 3)));
-            Image::factory()->create(['imageable_type' => Post::class, 'imageable_id'=>$post->id]);
+            Image::factory()->create(['imageable_type' => Post::class, 'imageable_id' => $post->id]);
         });
     }
 }
