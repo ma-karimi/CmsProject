@@ -48,8 +48,7 @@ class PostController extends Controller
 
     public function store(CreatePostRequest $request, Post $post)
     {
-
-        $pictue_name = (Auth::user()->id) . '-' . request('alt') . '-' . Carbon::now()->timestamp
+        $pictue_name = (Auth::user()->id) . '-' . $request->alt . '-' . Carbon::now()->timestamp
             . '.' . $request->file('image')->getClientOriginalExtension();
         $request['path'] = $request->file('image')->storePubliclyAs('posts', $pictue_name);
         $request['user_id'] = Auth::user()->id;

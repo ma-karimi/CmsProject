@@ -67,14 +67,6 @@
                                         <button type="submit" class="btn btn-danger m-1">{{ __('حــذف') }}</button>
                                     </form>
 
-                                    <form action="{{route('users.posts.status',$post)}}" method="post">
-                                        @csrf
-                                        <button type="submit" class="btn btn-info m-1">
-                                            {{$post->status ? 'بایـگانی' : 'انتـشــار'}}
-                                        </button>
-                                    </form>
-
-
                                     @if($post->deleted_at != null)
                                         <form action="{{route('users.posts.restore',$post)}}" method="post" class="d-flex flex-row">
                                             @csrf
