@@ -17,6 +17,8 @@
 
     <style>
         body {
+            direction: rtl;
+            text-align: right;
             font-family: 'Nunito';
         }
     </style>
@@ -35,6 +37,9 @@
         <div class="card">
             <p class="h1 card-body m-5 p-5 text-info">
                 Welcome to CMS Project
+            </p>
+            <p class="text-center badge badge-info border border-light py-2">
+                <a href="{{ route('home') }}" class="ml-4 text-sm text-gray-700 underline">To see all Post Click Here</a>
             </p>
         </div>
     </div>
