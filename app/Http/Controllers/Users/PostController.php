@@ -5,22 +5,34 @@ namespace App\Http\Controllers\Users;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreatePostRequest;
 use App\Models\Category;
-use App\Models\Image;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-//        $posts=Post::with(['tags','categories','image','author'])->get();
-        $posts = Post::latest()->where('user_id', Auth::user()->id)->paginate(5);
-        return view('users.posts.index')->withPosts($posts);
+        $user = Auth::user()->id;
+        switch ($request->sort){
+            case 'all':
+            default:
+                $posts = Post::where('user_id', $user)->paginate(5);
+                return view('users.posts.index')->withPosts($posts);
+            case 'publish':
+                $posts = Post::latest()->where('user_id', $user)->where('status', 1)->paginate(5);
+                return view('users.posts.index')->withPosts($posts);
+            case 'date':
+                $posts = Post::latest()->where('user_id', $user)->paginate(5);
+                return view('users.posts.index')->withPosts($posts);
+            case 'deleted':
+                $posts = Post::onlyTrashed()->where('user_id', $user)->paginate(5);
+                return view('users.posts.index')->withPosts($posts);
+
+        }
     }
 
 

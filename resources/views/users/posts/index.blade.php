@@ -7,7 +7,23 @@
                 <div class="card">
                     <div class="card-header d-flex flex-row align-items-center justify-content-between">
                         {{ __('مـدیریــت پسـت ها') }}
-                        <a class="btn btn-outline-dark" href="{{ route('users.posts.create') }}">{{ __('پسـت جدید') }}</a>
+
+                        <div class="d-flex flex-row">
+                            <form action="{{route('users.posts.index')}}" class="form-group d-flex flex-row">
+                                <select class="form-control" name="sort">
+                                    <option value="all">{{ __('نمایـش کامـل') }}</option>
+                                    <option value="date">{{ __('تاریخ انتـشــار') }}</option>
+                                    <option value="deleted">{{ __('حـذف شـده') }}</option>
+                                    <option value="publish">{{ __('منتـشــر شـده') }}</option>
+                                </select>
+                                <button type="submit" class="btn btn-outline-secondary mx-1">
+                                    {{ __('✓') }}
+                                </button>
+                            </form>
+                            <a class="btn btn-outline-dark mx-1" href="{{ route('users.posts.create') }}">
+                                {{ __('پسـت جدید') }}
+                            </a>
+                        </div>
                     </div>
 
                     <div class="card-body">

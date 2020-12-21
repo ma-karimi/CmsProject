@@ -74,8 +74,20 @@
                                         </button>
                                     </form>
 
+<<<<<<< Updated upstream
                                     <a class="btn btn-success m-1" href="{{route('users.posts.edit',$post)}}">{{__('ویرایـش')}}</a>
 
+=======
+                                    @if($post->deleted_at != null)
+                                        <a class="btn btn-success m-1" href="{{route('users.posts.edit',$post)}}">{{__('بازیابـی')}}</a>
+                                    @else
+                                    <form action="{{route('users.posts.destroy',$post)}}" method="post" class="d-flex flex-row">
+                                        @csrf @method('delete')
+                                        <button type="submit" class="btn btn-danger m-1">{{ __('حــذف موقـت') }}</button>
+                                    </form>
+                                    @endif
+                                    <a class="btn btn-success m-1" href="{{route('users.posts.edit',$post)}}">{{__('حــذف')}}</a>
+>>>>>>> Stashed changes
                                 </td>
                             </tr>
 
