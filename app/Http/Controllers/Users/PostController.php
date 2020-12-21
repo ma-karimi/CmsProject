@@ -71,8 +71,9 @@ class PostController extends Controller
     }
 
 
-    public function show(Post $post)
+    public function show(int $post)
     {
+        $post = Post::withTrashed()->find($post);
         $this->authorize('view', $post);
         return view('users.posts.show')->withPost($post);
     }
