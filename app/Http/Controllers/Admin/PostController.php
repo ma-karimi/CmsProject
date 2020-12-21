@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -31,7 +32,11 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-        return view('admin.posts.show')->withPost($post);
+        $path = Storage::url($post->image->path);
+
+        return view('admin.posts.show')
+            ->withPost($post)
+            ->withPath($path);
     }
 
 

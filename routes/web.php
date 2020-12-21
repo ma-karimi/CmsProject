@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PanelController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\PostStatusController;
+use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\UserController;
 
 use App\Http\Controllers\Admin\UserStatusController;
@@ -12,6 +14,7 @@ use App\Http\Controllers\Home\CategoryController;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Home\TagController;
 use App\Http\Controllers\Users\DashboardController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -25,7 +28,7 @@ Route::get('categories/{category}/show',[CategoryController::class,'show'])->nam
 Route::get('tags',[TagController::class,'index'])->name('tags');
 Route::get('tags/{tag}/show',[TagController::class,'show'])->name('tags.show');
 
-Route::group(['prefix' => 'auth'],function(){
+Route::group(['prefix' => 'auth'], function () {
     Route::get('login', [LoginController::class, 'showLogin'])
         ->name('showLogin');
     Route::post('authNum', [LoginController::class, 'authNum'])
@@ -46,17 +49,20 @@ Route::group(['prefix' => 'auth'],function(){
 
 Route::group(['middleware' => ['web', 'role:admin'], 'prefix' => 'admin'], function () {
 
-    Route::get('dashboard', [PanelController::class,'__invoke'])
+    Route::get('dashboard', [PanelController::class, '__invoke'])
         ->name('admin.dashboard');
 
     Route::resource('users', UserController::class)
-        ->only('index','show','destroy');
+        ->only('index', 'show', 'destroy');
     Route::post('users/{user}/status', UserStatusController::class)
         ->name('users.status');
 
     Route::resource('posts', PostController::class)
-        ->only('index','show','destroy');
+        ->only('index', 'show', 'destroy');
     Route::post('posts/{post}/status', PostStatusController::class)
         ->name('posts.status');
+
+    Route::resource('tags', TagController::class)->except('show');
+    Route::resource('categories', CategoryController::class)->except('show');
 });
 

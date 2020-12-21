@@ -20,6 +20,6 @@ class PostStatusController extends Controller
             'status' => !$post->status,
         ]);
 
-        return redirect()->back()->with('status', __('وضـعیت کاربـر با موفقـیت تغـییر کرد.'));
+        return redirect()->back()->with('status', __('وضـعیت پسـت با موفقـیت تغـییر کرد.'));
     }
 }

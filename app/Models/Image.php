@@ -11,6 +11,8 @@ class Image extends Model
     public $timestamps = false;
     protected $guarded = [];
 
+    #todo setter fot title
+
     public function imageable()
     {
         return $this->morphTo();
