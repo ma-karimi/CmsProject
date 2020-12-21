@@ -42,8 +42,8 @@
                             <tr>
                                 <td>تــگ:</td>
                                 <td>
-                                    @foreach($post->tags as $tags)
-                                        <div class="badge badge-info border-dark border">{{ucfirst($tags->title)}}</div>
+                                    @foreach($post->tags as $tag)
+                                        <div class="badge badge-info border-dark border">{{ucfirst($tag->title)}}</div>
                                     @endforeach
                                 </td>
                             </tr>

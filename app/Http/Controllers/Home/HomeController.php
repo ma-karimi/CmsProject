@@ -26,8 +26,8 @@ class HomeController extends Controller
         $tags = Tag::all();
         $categories = Category::all();
         return view('home.posts.show')
-            ->withPost($post)
             ->withTags($tags)
+            ->withPost($post)
             ->withCategories($categories);
     }
 }

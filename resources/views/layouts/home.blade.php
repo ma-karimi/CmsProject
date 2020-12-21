@@ -52,10 +52,10 @@
                     <div class="card-body">
 
                         <div class="form-group">
-                            <label class="d-flex justify-content-between" for="categories">
-                                {{ __('تــگ:') }} {{count($tags)}}
+                            <label class="d-flex justify-content-between" for="tags">
+                                {{ __('تــگ:') }} {{count(\App\Models\Tag::all())}}
                             </label>
-                            <select class="form-control" id="categories">
+                            <select class="form-control" id="tags">
                                 @foreach($tags as $tag)
                                     <option value="">
                                         <a class="dropdown-item" href="#">{{$tag->title}}</a>
@@ -66,7 +66,7 @@
 
                         <div class="form-group">
                             <label class="d-flex justify-content-between" for="categories">
-                                {{ __('دسـته بنـدی:') }} {{count($categories)}}
+                                {{ __('دسـته بنـدی:') }} {{count(\App\Models\Category::all())}}
                             </label>
                             <select class="form-control" id="categories">
                                 @foreach($categories as $category)
