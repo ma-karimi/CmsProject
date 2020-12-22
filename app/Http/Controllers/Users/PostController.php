@@ -31,7 +31,6 @@ class PostController extends Controller
             case 'deleted':
                 $posts = Post::onlyTrashed()->where('user_id', $user)->paginate(5);
                 return view('users.posts.index')->withPosts($posts);
-
         }
     }
 
