@@ -8,7 +8,7 @@
                     <div class="card-header">{{ __('ورود') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('authNum') }}">
+                        <form method="POST" action="{{ route('checkNumber') }}">
                             @csrf
 
                             @if(session('error'))

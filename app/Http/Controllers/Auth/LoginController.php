@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Authenticate;
+namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthNumberRequest;
@@ -16,39 +16,31 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    public function authNum(AuthNumberRequest $request)
+    public function checkNumber(AuthNumberRequest $request)
     {
         $number = $request->get('number');
         session()->put('number', $number);
         if (User::where('number', $number)->exists()) {
-            return redirect()->route('setPass');
+            return redirect()->route('getPassword');
         } else {
             $verify_code = rand(10000, 99999);
             return view('auth.verifyNumber', compact('verify_code', $verify_code));
         }
     }
 
-    public function setPass()
+    public function getPassword()
     {
-        return view('auth.getPass');
+        return view('auth.getPassword');
     }
 
-    public function Login(Request $request)
+    public function login(Request $request)
     {
-
         $pass = $request->get('password');
         $number = session('number');
         $user = User::where('number', $number)->first();
-        if (!$user->status){
-            return redirect()->back()->with('error', 'دستـرسی شمـا غیـرمجـاز اسـت.');
-        }
         if (Hash::check($pass, $user->getAuthPassword())){
             Auth::login($user);
-            if ($user->hasRole('admin')){
-                return redirect()->route('admin.dashboard');
-            }
-            else
-                return redirect()->route('users.dashboard');
+            return redirect()->route('users.dashboard');
         }
         else
             return redirect()->back()->with('error', 'مشـخصــات وارد شـده صـحیح نـیــست.');
@@ -62,5 +54,3 @@ class LoginController extends Controller
         return redirect()->route('/');
     }
 }
-
-
