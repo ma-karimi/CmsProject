@@ -15,9 +15,9 @@ class PostSeeder extends Seeder
     {
         $categories = Category::all();
         $tags = Tag::all();
-        Post::factory()->count(10)->create()->each(function ($post) use ($categories, $tags) {
-            $post->categories()->attach($categories->random(rand(1, 3)));
-            $post->tags()->attach($tags->random(rand(1, 3)));
+        Post::factory()->count(5)->create()->each(function ($post) use ($categories, $tags) {
+            $post->categories()->attach($categories->random(rand(1, 2)));
+            $post->tags()->attach($tags->random(rand(1, 2)));
             Image::factory()->create(['imageable_type' => Post::class, 'imageable_id' => $post->id]);
         });
     }

@@ -14,7 +14,7 @@ class AddStatusToPostsTable extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->boolean('status')->default(true)->after('content');
+            $table->boolean('status')->default(false)->after('content');
         });
     }
 
