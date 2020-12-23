@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreatePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
@@ -13,6 +14,12 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth']);
+        $this->authorizeResource(Post::class, 'post');
+    }
+
 
     public function index(Request $request)
     {
@@ -47,25 +54,23 @@ class PostController extends Controller
 
     public function store(CreatePostRequest $request, Post $post)
     {
-        $pictue_name = (Auth::user()->id) . '-' . $request->alt . '-' . Carbon::now()->timestamp
+
+        $pictue_name = (Auth::user()->id) . '-' . request('alt') . '-' . Carbon::now()->timestamp
             . '.' . $request->file('image')->getClientOriginalExtension();
         $request['path'] = $request->file('image')->storePubliclyAs('posts', $pictue_name);
-        $request['user_id'] = Auth::user()->id;
-        #$post = create($request->all());
-        $post = Post::create([
-            'title' => $request->title,
-            'content' => $request->content,
-            'slug' => $request->slug,
-            'user_id' => $request->user_id,
-            ]);
-        $post->tags()->attach($request->tag);
-        $post->categories()->attach($request->category);
+
+        $post = auth()->user()->posts()->create($request->validated());
+
+        $post->tags()->attach($request->tags);
+        $post->categories()->attach($request->categories);
+
         $post->image()->create([
             'title' => $request->alt,
             'alt' => $request->alt,
             'path' => $request->path,
         ]);
-        return redirect()->route('users.posts.index')->with('status','پسـت جدید با موفقـیت ساختـه شـد.');
+        return redirect()->route('users.posts.index')
+            ->with('status','پسـت جدید با موفقـیت ساختـه شـد.');
     }
 
 
@@ -88,9 +93,25 @@ class PostController extends Controller
     }
 
 
-    public function update(Request $request, Post $post)
+    public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+        $this->authorize('update', $post);
+
+        $pictue_name = (Auth::user()->id) . '-' . request('alt') . '-' . Carbon::now()->timestamp
+            . '.' . $request->file('image')->getClientOriginalExtension();
+        $request['path'] = $request->file('image')->storePubliclyAs('posts', $pictue_name);
+
+        $post = auth()->user()->posts()->update($request->validated());
+        $post->tags()->attach($request->tags);
+        $post->categories()->attach($request->categories);
+
+        $post->image()->update([
+            'title' => $request->alt,
+            'alt' => $request->alt,
+            'path' => $request->path,
+        ]);
+        return redirect()->route('users.posts.index')
+            ->with('status','پسـت جدید بروزرسـانی شـد.');
     }
 
 

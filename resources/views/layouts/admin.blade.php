@@ -45,6 +45,8 @@
                     <a class="m-3" href="{{route('admin.dashboard')}}">پـنل مـدیریـت</a>
                     <a class="m-3" href="{{route('users.index')}}">کـاربران</a>
                     <a class="m-3" href="{{route('posts.index')}}">پـســت ها</a>
+                    <a class="m-3" href="{{route('tags.index')}}">تــگ ها</a>
+                    <a class="m-3" href="{{route('categories.index')}}">دسـتــه بنـدی ها</a>
 
                 </div>
             </div>

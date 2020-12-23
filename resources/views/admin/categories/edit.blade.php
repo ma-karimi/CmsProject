@@ -1,4 +1,4 @@
-@extends('layouts.users')
+@extends('layouts.admin')
 
 @section('content')
     <div class="container">
@@ -6,8 +6,8 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header d-flex flex-row align-items-center justify-content-between">
-                        {{ __('پسـت جدید') }}
-                        <a class="btn btn-outline-dark" href="{{ route('users.posts.index') }}">{{ __('بازگشــت') }}</a>
+                        {{ __('ویرایـش دسـتــه بنـدی') }}
+                        <a class="btn btn-outline-dark" href="{{ route('categories.index') }}">{{ __('بازگشــت') }}</a>
                     </div>
 
 
@@ -21,7 +21,7 @@
                         </div>
                     @endif
                     <div class="card-body">
-                        <form method="POST" enctype="multipart/form-data" action="{{ route('users.posts.update',$post) }}">
+                        <form method="POST" enctype="multipart/form-data" action="{{ route('categories.update',$category) }}">
                             @csrf
                             @method('PATCH')
 
@@ -29,15 +29,7 @@
                                 <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('عـنوان:') }}</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" name="title" class="form-control" value="{{$post->title}}">
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="content" class="col-md-4 col-form-label text-md-right">{{ __('محتـوی:') }}</label>
-
-                                <div class="col-md-6">
-                                    <input type="text" name="content" class="form-control" value="{{$post->content}}">
+                                    <input type="text" name="title" class="form-control" value="{{$category->title}}">
                                 </div>
                             </div>
 
@@ -45,7 +37,7 @@
                                 <label for="slug" class="col-md-4 col-form-label text-md-right">{{ __('پـیوند یـکتــا:') }}</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="slug" value="{{$post->slug}}">
+                                    <input type="text" class="form-control" name="slug" value="{{$category->slug}}">
                                 </div>
                             </div>
 
@@ -61,28 +53,8 @@
                                 <label for="alt" class="col-md-4 col-form-label text-md-right">{{ __('متـن جایـگزین :') }}</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="alt" value="{{$post->image->alt}}">
+                                    <input type="text" class="form-control" name="alt" value="{{$category->image->alt}}">
                                 </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="categories" class="col-md-4 col-form-label text-md-right">{{ __('دسـته بـندی:') }}</label>
-
-                                <select class="form-control" multiple name="categories[]">
-                                    @foreach($categories as $category)
-                                        <option value="{{$category->title}}">{{$category->title}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="tags class="col-md-4 col-form-label text-md-right">{{ __('تــگ:') }}</label>
-
-                                <select class="form-control" multiple name="tags[]">
-                                    @foreach($tags as $tag)
-                                        <option value="{{$tag->title}}">{{$tag->title}}</option>
-                                    @endforeach
-                                </select>
                             </div>
 
                             <div class="form-group row mb-0">

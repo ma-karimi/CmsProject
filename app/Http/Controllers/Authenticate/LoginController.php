@@ -21,7 +21,7 @@ class LoginController extends Controller
         $number = $request->get('number');
         session()->put('number', $number);
         if (User::where('number', $number)->exists()) {
-            return redirect()->route('setPass'); 
+            return redirect()->route('setPass');
         } else {
             $verify_code = rand(10000, 99999);
             return view('auth.verifyNumber', compact('verify_code', $verify_code));
@@ -35,9 +35,13 @@ class LoginController extends Controller
 
     public function Login(Request $request)
     {
+
         $pass = $request->get('password');
         $number = session('number');
         $user = User::where('number', $number)->first();
+        if (!$user->status){
+            return redirect()->back()->with('error', 'دستـرسی شمـا غیـرمجـاز اسـت.');
+        }
         if (Hash::check($pass, $user->getAuthPassword())){
             Auth::login($user);
             if ($user->hasRole('admin')){

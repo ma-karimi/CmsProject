@@ -62,10 +62,7 @@
                             <tr>
                                 <td>عمـلیات:</td>
                                 <td class="d-flex flex-row">
-                                    <form action="{{route('users.posts.destroy',$post)}}" method="post">
-                                        @csrf @method('delete')
-                                        <button type="submit" class="btn btn-danger m-1">{{ __('حــذف') }}</button>
-                                    </form>
+                                    <a class="btn btn-success m-1" href="{{route('users.posts.edit',$post)}}">{{__('ویرایـش')}}</a>
 
                                     @if($post->deleted_at != null)
                                         <form action="{{route('users.posts.restore',$post)}}" method="post" class="d-flex flex-row">
@@ -78,7 +75,6 @@
                                         <button type="submit" class="btn btn-danger m-1">{{ __('حــذف موقـت') }}</button>
                                     </form>
                                     @endif
-
                                     <form action="{{route('users.posts.terminate',$post)}}" method="post" class="d-flex flex-row">
                                         @csrf
                                         <button type="submit" class="btn btn-success m-1">{{__('حــذف')}}</button>

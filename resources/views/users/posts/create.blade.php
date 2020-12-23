@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header d-flex flex-row align-items-center justify-content-between">
                         {{ __('پسـت جدید') }}
@@ -65,19 +65,19 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="category" class="col-md-4 col-form-label text-md-right">{{ __('دسـته بـندی:') }}</label>
+                                <label for="categories" class="col-md-4 col-form-label text-md-right">{{ __('دسـته بـندی:') }}</label>
 
-                                <select class="form-control" multiple name="category[]">
+                                <select class="form-control" multiple name="categories[]">
                                     @foreach($categories as $category)
-                                            <option name="{{$category->id}}">{{$category->title}}</option>
+                                            <option value="{{$category->id}}">{{$category->title}}</option>
                                     @endforeach
                                 </select>
                             </div>
 
                             <div class="form-group row">
-                                <label for="tag" class="col-md-4 col-form-label text-md-right">{{ __('تــگ:') }}</label>
+                                <label for="tags" class="col-md-4 col-form-label text-md-right">{{ __('تــگ:') }}</label>
 
-                                <select class="form-control" multiple name="tag[]">
+                                <select class="form-control" multiple name="tags[]">
                                     @foreach($tags as $tag)
                                         <option value="{{$tag->id}}">{{$tag->title}}</option>
                                     @endforeach

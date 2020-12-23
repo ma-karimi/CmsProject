@@ -6,6 +6,7 @@ use App\Http\Controllers\Users\RestoreController;
 use App\Http\Controllers\Users\TerminateController;
 use Illuminate\Support\Facades\Route;
 
+
 Route::get('dashboard', [DashboardController::class,'__invoke'])
     ->name('dashboard');
 

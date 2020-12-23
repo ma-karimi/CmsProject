@@ -32,15 +32,7 @@
                                 </tr>
                                 <tr>
                                     <td>نـقـــش:</td>
-                                    <td>{{$admin->RoleNames}}</td>
-                                </tr>
-                                <tr>
-                                    <td>وضـعیـت:</td>
-                                    <td>{{$admin->status ? 'غیرفعال' : 'فعال'}}</td>
-                                </tr>
-                                <tr>
-                                    <td>عمـلیات:</td>
-                                    <td>{{$admin->id}}</td>
+                                    <td>{{$admin->RoleNames ? 'مدیـر' : 'کاربـر'}}</td>
                                 </tr>
 
                             </thead>

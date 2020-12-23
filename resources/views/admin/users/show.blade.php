@@ -37,24 +37,24 @@
                             </tr>
                             <tr>
                                 <td>نـقـــش:</td>
-                                <td>{{$user->RoleNames}}</td>
+                                <td>{{$user->RoleNames ? 'مدیـر' : 'کاربـر'}}</td>
                             </tr>
                             <tr>
                                 <td>وضـعیـت:</td>
-                                <td id="status">{{$user->status ? 'غـیر فـعال' : 'فـعال'}}</td>
+                                <td id="status">{{$user->status ? 'فـعال' : 'غـیرفـعال'}}</td>
                             </tr>
                             <tr>
                                 <td>عمـلیات:</td>
                                 <td class="d-flex flex-row">
                                     <form action="{{route('users.destroy',$user)}}" method="post">
                                         @csrf @method('delete')
-                                        <button type="submit" class="btn btn-danger m-1">{{ __('حــذف') }}</button>
+                                        <button type="submit" class="btn btn-outline-danger m-1">{{ __('حــذف') }}</button>
                                     </form>
 
                                     <form action="{{route('users.status',$user)}}" method="post">
                                         @csrf
-                                        <button type="submit" class="btn btn-danger m-1">
-                                            {{$user->status ? 'فـعال سـازی' : 'غـیر فـعال سـازی '}}
+                                        <button type="submit" class="{{$user->status ? 'btn btn-outline-danger' : 'btn btn-outline-success'}} m-1">
+                                            {{$user->status ? 'غـیرفـعال سـازی ' : 'فـعال سـازی'}}
                                         </button>
                                     </form>
 

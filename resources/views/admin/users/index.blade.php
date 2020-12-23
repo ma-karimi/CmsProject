@@ -32,8 +32,8 @@
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->email}}</td>
                                     <td>{{$user->number}}</td>
-                                    <td>{{$user->RoleNames}}</td>
-                                    <td>{{$user->status ? 'غیرفعال' : 'فعال'}}</td>
+                                    <td>{{$user->RoleNames ? 'مدیـر' : 'کاربـر'}}</td>
+                                    <td>{{$user->status ? 'فـعال' : 'غـیرفـعال'}}</td>
                                     <td>
                                         <a class="btn btn-outline-dark" href="{{route('users.show', $user->id)}}">{{ __('نـمایــش') }}</a>
                                     </td>
