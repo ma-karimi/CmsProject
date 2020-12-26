@@ -7,7 +7,26 @@
                 <div class="card">
                     <div class="card-header d-flex flex-row align-items-center justify-content-between">
                         {{ __('مـدیریــت پسـت ها') }}
-                        <a class="btn btn-outline-dark" href="{{ route('users.posts.create') }}">{{ __('پسـت جدید') }}</a>
+                        <div class="d-flex flex-row">
+                            <form action="{{route('posts.index')}}" class="form-group d-flex flex-row">
+                                <select class="form-control" name="filter">
+                                    @if(auth()->user()->hasPermissionTo('publisher'))
+                                        @foreach(\App\Models\Post::$admin_filters as $admin_filter)
+                                            <option value="{{$admin_filter}}" @if(request('filter') == $admin_filter) selected @endif>{{__($admin_filter)}}</option>
+                                        @endforeach
+                                    @else
+                                        @foreach(\App\Models\Post::$user_filters as $user_filter)
+                                            <option value="{{$user_filter}}" @if(request('filter') == $user_filter) selected @endif>{{__($user_filter)}}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                                <button type="submit" class="btn btn-outline-secondary mx-1">
+                                    {{ __('✓') }}
+                                </button>
+                            </form>
+                            <a class="btn btn-outline-dark" href="{{ route('posts.create') }}">{{ __('پسـت جدید') }}</a>
+                            <a class="btn btn-outline-dark" href="{{ route('users.dashboard') }}">{{ __('بازگشــت') }}</a>
+                        </div>
                     </div>
 
                     <div class="card-body">
@@ -20,7 +39,9 @@
                                 <th>#</th>
                                 <th>عـنوان</th>
                                 <th>پـیوند یـکتــا</th>
-                                <th>نـویسـنده</th>
+                                @can('publisher')
+                                    <th>نـویسـنده</th>
+                                @endcan
                                 <th>دسـته بـندی</th>
                                 <th>تــگ</th>
                                 <th>وضـعیـت</th>
@@ -35,7 +56,9 @@
                                     <td>{{$post->id}}</td>
                                     <td>{{ucfirst($post->title)}}</td>
                                     <td>{{$post->slug}}</td>
-                                    <td>{{ucfirst($post->author->name)}}</td>
+                                    @can('publisher')
+                                        <td>{{ucfirst($post->author->name)}}</td>
+                                    @endcan
                                     <td>
                                         @foreach($post->categories as $category)
                                             <div class="badge badge-light border-dark border">{{ucfirst($category->title)."\n"}}</div>
@@ -48,8 +71,16 @@
                                         @endforeach
                                     </td>
                                     <td>{{$post->status ? 'انتـشــار' : 'بایـگانی' }}</td>
-                                    <td>
-                                        <a class="btn btn-outline-dark" href="{{route('users.posts.show', $post->id)}}">{{ __('نـمایــش') }}</a>
+                                    <td class="d-flex flex-row">
+                                        <a class="btn btn-outline-dark" href="{{route('posts.show', $post->id)}}">{{ __('نـمایــش') }}</a>
+                                        @if($post->deleted_at == true)
+                                            <form action="{{route('posts.terminate',$post)}}" method="post">
+                                                @csrf
+                                                <button type="submit" class="btn btn-outline-danger mx-1">
+                                                    {{ __('حـذف') }}
+                                                </button>
+                                            </form>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

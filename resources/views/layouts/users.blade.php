@@ -46,9 +46,7 @@
                     @can('manager')
                         <a class="m-2 btn" href="{{route('users.index')}}">کـاربران</a>
                     @endcan
-                    @can('writer')
-                        <a class="m-2 btn" href="#">پـســت ها</a>
-                    @endcan
+                    <a class="m-2 btn" href="{{route('posts.index')}}">پـســت ها</a>
                     @can('creator')
                         <a class="m-2 btn" href="#">تــگ ها</a>
                         <a class="m-2 btn" href="#">دسـتــه بنـدی ها</a>

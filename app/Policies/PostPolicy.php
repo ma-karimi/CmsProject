@@ -10,9 +10,16 @@ class PostPolicy
 {
     use HandlesAuthorization;
 
-    public function viewAny(User $user)
+    public function before(User $user)
     {
-        return true;
+        if ($user->hasPermissionTo('publisher')) {
+            return true;
+        }
+    }
+
+    public function viewAny(User $user, Post $post)
+    {
+        return $post->user_id == $user->id;
     }
 
 

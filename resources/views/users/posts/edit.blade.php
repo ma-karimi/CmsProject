@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header d-flex flex-row align-items-center justify-content-between">
                         {{ __('پسـت جدید') }}
-                        <a class="btn btn-outline-dark" href="{{ route('users.posts.index') }}">{{ __('بازگشــت') }}</a>
+                        <a class="btn btn-outline-dark" href="{{ route('posts.index') }}">{{ __('بازگشــت') }}</a>
                     </div>
 
 
@@ -21,7 +21,7 @@
                         </div>
                     @endif
                     <div class="card-body">
-                        <form method="POST" enctype="multipart/form-data" action="{{ route('users.posts.update',$post) }}">
+                        <form method="POST" enctype="multipart/form-data" action="{{ route('posts.update',$post) }}">
                             @csrf
                             @method('PATCH')
 
@@ -68,7 +68,7 @@
                             <div class="form-group row">
                                 <label for="categories" class="col-md-4 col-form-label text-md-right">{{ __('دسـته بـندی:') }}</label>
 
-                                <select class="form-control" multiple name="categories[]">
+                                <select class="form-control col-md-6" multiple name="categories[]">
                                     @foreach($categories as $category)
                                         <option value="{{$category->title}}">{{$category->title}}</option>
                                     @endforeach
@@ -76,9 +76,9 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="tags class="col-md-4 col-form-label text-md-right">{{ __('تــگ:') }}</label>
+                                <label for="tags" class="col-md-4 col-form-label text-md-right">{{ __('تــگ:') }}</label>
 
-                                <select class="form-control" multiple name="tags[]">
+                                <select class="form-control col-md-6" multiple name="tags[]">
                                     @foreach($tags as $tag)
                                         <option value="{{$tag->title}}">{{$tag->title}}</option>
                                     @endforeach

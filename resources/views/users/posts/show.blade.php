@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header d-flex flex-row align-items-center justify-content-between">
                         {{ __("پـســت $post->title") }}
-                        <a class="btn btn-outline-dark" href="{{ route('users.posts.index') }}">{{ __('بازگشــت') }}</a>
+                        <a class="btn btn-outline-dark" href="{{ route('posts.index') }}">{{ __('بازگشــت') }}</a>
                     </div>
 
                     <div class="card-body">
@@ -19,10 +19,6 @@
 
                         <table class="table">
                             <thead>
-                            <tr>
-                                <td>#</td>
-                                <td>{{$post->id}}</td>
-                            </tr>
                             <tr>
                                 <td>عـنوان:</td>
                                 <td>{{$post->title}}</td>
@@ -62,16 +58,16 @@
                             <tr>
                                 <td>عمـلیات:</td>
                                 <td class="d-flex flex-row">
-                                    <a class="btn btn-success m-1" href="{{route('users.posts.edit',$post)}}">{{__('ویرایـش')}}</a>
+                                    <a class="btn btn-success m-1" href="{{route('posts.edit',$post)}}">{{__('ویرایـش')}}</a>
 
-                                    <form action="{{route('users.posts.status',$post)}}" method="post">
+                                    <form action="{{route('posts.status',$post)}}" method="post">
                                         @csrf
                                         <button type="submit" class="btn btn-info m-1">
                                             {{$post->status ? 'بایـگانی' : 'انتـشــار'}}
                                         </button>
                                     </form>
 
-                                    <form action="{{route('users.posts.destroy',$post)}}" method="post">
+                                    <form action="{{route('posts.destroy',$post)}}" method="post">
                                         @csrf @method('delete')
                                         <button type="submit" class="btn btn-danger m-1">{{ __('حــذف') }}</button>
                                     </form>

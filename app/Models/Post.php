@@ -13,6 +13,11 @@ class Post extends Model
 {
     use HasFactory, SoftDeletes;
 
+    public static $admin_filters = [
+        'all', 'published','unpublished'];
+    public static $user_filters = [
+        'all', 'date', 'deleted', 'published','unpublished'];
+
     protected $guarded = ['image'];
 
     public function setTitleAttribute($value)

@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header d-flex flex-row align-items-center justify-content-between">
                         {{ __('پسـت جدید') }}
-                        <a class="btn btn-outline-dark" href="{{ route('users.posts.index') }}">{{ __('بازگشــت') }}</a>
+                        <a class="btn btn-outline-dark" href="{{ route('posts.index') }}">{{ __('بازگشــت') }}</a>
                     </div>
 
 
@@ -21,7 +21,7 @@
                         </div>
                     @endif
                     <div class="card-body">
-                        <form method="POST" enctype="multipart/form-data" action="{{ route('users.posts.store') }}">
+                        <form method="POST" enctype="multipart/form-data" action="{{ route('posts.store') }}">
                             @csrf
 
                             <div class="form-group row">
