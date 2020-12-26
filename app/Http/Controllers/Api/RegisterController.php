@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
@@ -20,11 +20,6 @@ class RegisterController extends Controller
     public function __construct(AuthRepositoryInterface $authRepository)
     {
         $this->authRepository = $authRepository;
-    }
-
-    public function showRegister()
-    {
-        return view('auth.register');
     }
 
     public function register(RegisterRequest $request)

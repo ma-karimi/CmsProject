@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthNumberRequest;
@@ -22,11 +22,6 @@ class LoginController extends Controller
         $this->authRepository = $authRepository;
     }
 
-    public function showLogin()
-    {
-        return view('auth.login');
-    }
-
     public function checkNumber(AuthNumberRequest $request)
     {
         $verify_code = 1;
@@ -39,10 +34,6 @@ class LoginController extends Controller
         }
     }
 
-    public function getPassword()
-    {
-        return view('auth.getPassword');
-    }
 
     public function login(Request $request)
     {
