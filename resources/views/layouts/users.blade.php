@@ -40,11 +40,19 @@
         <div class="d-flex flex-row">
             <div class="container-fluid text-center col-md-2 ">
                 <div class=" sidenav border pt-4 d-flex flex-column">
-                    <h3>پـنل کـاربری</h3>
+                    <h3>پـنل مـدیریـت</h3>
                     <img src="https://uupload.ir/files/h23g_richscorer_small.png" alt="">
-                    <a class="m-3" href="{{route('users.dashboard')}}">پـنل کـاربری</a>
-                    <a class="m-3" href="{{route('users.posts.index')}}">پـســت ها</a>
-
+                    <a class="m-2 btn" href="{{route('users.dashboard')}}">پـنل کـاربری</a>
+                    @can('manager')
+                        <a class="m-2 btn" href="{{route('users.index')}}">کـاربران</a>
+                    @endcan
+                    @can('writer')
+                        <a class="m-2 btn" href="#">پـســت ها</a>
+                    @endcan
+                    @can('creator')
+                        <a class="m-2 btn" href="#">تــگ ها</a>
+                        <a class="m-2 btn" href="#">دسـتــه بنـدی ها</a>
+                    @endcan
                 </div>
             </div>
             @yield('content')

@@ -14,10 +14,10 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
-        Permission::create(['name' => 'all']);
-        Permission::create(['name' => 'writer']);
-        Permission::create(['name' => 'publisher']);
         Permission::create(['name' => 'manager']);
+        Permission::create(['name' => 'publisher']);
         Permission::create(['name' => 'creator']);
+        Permission::create(['name' => 'writer']);
+        Permission::create(['name' => 'guest']);
     }
 }

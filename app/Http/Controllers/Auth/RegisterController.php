@@ -18,7 +18,9 @@ class RegisterController extends Controller
 
     public function register(RegisterRequest $request)
     {
-        $user = User::create($request->validated());
+        $user = User::create($request->validated())
+            ->assignRole('user')
+            ->givePermissionTo('guest');
         SendWelcomeMailJob::dispatch($user)->delay(10);
 
         if (Auth::attempt(['email' => $user->email, 'password' => $request->get('password')])) {

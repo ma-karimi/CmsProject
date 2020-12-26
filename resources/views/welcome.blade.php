@@ -39,7 +39,7 @@
                 Welcome to CMS Project
             </p>
             <p class="text-center badge badge-info border border-light py-2">
-                <a href="{{ route('home') }}" class="ml-4 text-sm text-gray-700 underline">To see all Post Click Here</a>
+                <a href="" class="ml-4 text-sm text-gray-700 underline">To see all Post Click Here</a>
             </p>
         </div>
     </div>

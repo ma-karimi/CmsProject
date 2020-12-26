@@ -15,33 +15,37 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <td>#</td>
-                                    <td>{{$user->id}}</td>
-                                </tr>
-                                <tr>
                                     <td>نام کـاربری:</td>
                                     <td>{{$user->name}}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>ایمیـل:</td>
                                     <td>{{$user->email}}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>شـماره همـراه:</td>
                                     <td>{{$user->number}}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>نـقـــش:</td>
                                     <td>{{$user->RoleNames ?: 'کاربر ساده'}}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>وضـعیـت:</td>
                                     <td>{{$user->status ? 'فعال' : 'غیرفعال'}}</td>
+                                    <td>
+                                        <a class="btn btn-outline-dark"
+                                           href="{{route('users.edit',$user)}}">
+                                            {{ __('ویـرایــش') }}
+                                        </a>
+                                    </td>
                                 </tr>
                             </thead>
-
                         </table>
-
                     </div>
                 </div>
             </div>

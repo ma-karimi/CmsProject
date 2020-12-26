@@ -14,6 +14,17 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasRoles, HasPermissions;
 
+    public static $statuses = [
+        'all',
+        'active',
+        'deactive',
+        'guest',
+        'writer',
+        'creator',
+        'publisher',
+        'manager',
+    ];
+
     protected $fillable = [
         'name',
         'number',

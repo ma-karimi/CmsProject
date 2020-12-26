@@ -3,6 +3,8 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Users\DashboardController;
+use App\Http\Controllers\Users\UserController;
+use App\Http\Controllers\Users\UserStatusController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -32,4 +34,12 @@ Route::group(['prefix' => 'users'], function () {
 
     Route::get('dashboard', [DashboardController::class, '__invoke'])
         ->name('users.dashboard');
+
+    Route::resource('users', UserController::class)->except('create','store');
+    Route::post('status/{user}', [UserStatusController::class,'status'])
+        ->name('users.status');
+    Route::post('role/{user}', [UserStatusController::class,'roles'])
+        ->name('users.role');
+    Route::post('permission/{user}', [UserStatusController::class,'permissions'])
+        ->name('users.permission');
 });
