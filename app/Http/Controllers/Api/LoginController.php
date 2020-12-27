@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthNumberRequest;
 use App\Models\User;
 use App\Repository\AuthRepositoryInterface;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -38,14 +39,21 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $login = true;
-        $this->authRepository->login($request, $login);
+        $user = $this->authRepository->login($request, $login);
 
         if ($login == true){
-            return redirect()->route('users.dashboard');
+            return response()->json([
+                'status' => 200,
+                'message' => 'you are login successfully',
+                'data' => $user->toArray(),
+            ]);
         }
         else
-            return redirect()->back()
-                ->with('error', 'مشـخصــات وارد شـده صـحیح نـیــست.');
+            return response()->json([
+                'status' => 404,
+                'message' => 'inserted number and password is not true',
+                'data' => null
+            ]);
     }
 
     public function logout()

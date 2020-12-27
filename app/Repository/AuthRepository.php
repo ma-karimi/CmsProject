@@ -31,8 +31,7 @@ class AuthRepository implements AuthRepositoryInterface
         $number = session('number');
         $user = User::where('number', $number)->first();
         if (Hash::check($pass, $user->getAuthPassword())){
-            Auth::login($user);
-            return $login = true;
+            return $user;
         }
         else
             return $login = false;
